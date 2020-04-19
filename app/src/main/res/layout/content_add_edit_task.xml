@@ -6,7 +6,7 @@
         app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
     <LinearLayout
-            android:id="@+id/linearLayout2"
+            android:id="@+id/titleLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
@@ -18,7 +18,7 @@
             app:layout_constraintTop_toTopOf="parent">
 
         <TextView
-                android:id="@+id/addtitle"
+                android:id="@+id/titleTv"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="10dp"
@@ -27,7 +27,7 @@
                 android:textSize="18sp" />
 
         <EditText
-                android:id="@+id/titletask"
+                android:id="@+id/titleEt"
                 android:layout_width="match_parent"
                 android:layout_height="55dp"
                 android:background="@drawable/bginputtask"
@@ -41,7 +41,7 @@
     </LinearLayout>
 
     <LinearLayout
-            android:id="@+id/linearLayout3"
+            android:id="@+id/descriptionLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
@@ -49,11 +49,11 @@
             android:layout_marginEnd="8dp"
             android:orientation="vertical"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/linearLayout2"
-            app:layout_constraintTop_toBottomOf="@+id/linearLayout2">
+            app:layout_constraintStart_toEndOf="@+id/titleLayout"
+            app:layout_constraintTop_toBottomOf="@+id/titleLayout">
 
         <TextView
-                android:id="@+id/adddescription"
+                android:id="@+id/descriptionTv"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="10dp"
@@ -62,7 +62,7 @@
                 android:textSize="18sp" />
 
         <EditText
-                android:id="@+id/descriptiontask"
+                android:id="@+id/descriptionEt"
                 android:layout_width="match_parent"
                 android:layout_height="55dp"
                 android:background="@drawable/bginputtask"
@@ -77,18 +77,19 @@
     </LinearLayout>
 
     <LinearLayout
+            android:id="@+id/dueDateLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
             android:layout_marginTop="16dp"
             android:layout_marginEnd="8dp"
             android:orientation="vertical"
-            app:layout_constraintEnd_toStartOf="@+id/linearLayout2"
+            app:layout_constraintEnd_toStartOf="@+id/titleLayout"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/linearLayout3">
+            app:layout_constraintTop_toBottomOf="@+id/descriptionLayout">
 
         <TextView
-                android:id="@+id/adddate"
+                android:id="@+id/dueDateTv"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="10dp"
@@ -97,17 +98,17 @@
                 android:textSize="18sp" />
 
         <EditText
-                android:id="@+id/datetask"
+                android:id="@+id/dueDateEt"
                 android:layout_width="match_parent"
                 android:layout_height="55dp"
                 android:background="@drawable/bginputtask"
-                android:hint="When will?"
                 android:focusable="false"
+                android:hint="When will?"
                 android:inputType="none"
                 android:paddingStart="12dp"
                 android:paddingEnd="12dp"
                 android:textColor="@color/colorPrimaryDark"
-                android:textColorHint="#B5B5B5"/>
+                android:textColorHint="#B5B5B5" />
 
     </LinearLayout>
 

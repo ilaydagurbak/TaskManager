@@ -1,21 +1,24 @@
 package com.example.taskmanager
 
-import android.annotation.SuppressLint
 import android.app.DatePickerDialog
 import android.app.TimePickerDialog
 import android.os.Bundle
+import android.text.format.DateFormat
 import androidx.appcompat.app.AppCompatActivity
 import kotlinx.android.synthetic.main.activity_add_edit_task.*
 import kotlinx.android.synthetic.main.content_add_edit_task.*
 import java.time.LocalDate
+import java.time.LocalDateTime
 import java.time.LocalTime
+import java.time.format.DateTimeFormatter
+import java.time.format.FormatStyle
 
 
 class AddEditTaskActivity : AppCompatActivity() {
 
-    private var dueDate: LocalDate? = null
-    private var dueTime: LocalTime? = null
-
+    private lateinit var todo: Todo
+    private val dbHelper = DbHelper()
+    private val dateTimeFormatter = DateTimeFormatter.ofLocalizedDateTime(FormatStyle.SHORT)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -24,35 +27,66 @@ class AddEditTaskActivity : AppCompatActivity() {
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
         supportActionBar?.setDisplayShowHomeEnabled(true)
 
-        datetask.setOnClickListener {
-            val time: LocalTime = LocalTime.now()
-            val date: LocalDate = LocalDate.now()
 
+        dueDateEt.setOnClickListener {
+            val dueDate = todo.dueDate()
             val onDateSetListener =
                 DatePickerDialog.OnDateSetListener { _, year, month, dayOfMonth ->
                     val onTimeSetListener =
                         TimePickerDialog.OnTimeSetListener { _, hourOfDay, minute ->
-                            dueTime = LocalTime.of(hourOfDay, minute)
-                            dueDate = LocalDate.of(year, month + 1, dayOfMonth)
+                            todo.dueDate(
+                                LocalDateTime.of(
+                                    LocalDate.of(year, month + 1, dayOfMonth),
+                                    LocalTime.of(hourOfDay, minute)
+                                )
+                            )
 
-                            datetask.setText(dueDate?.toString() + " " + dueTime?.toString())
+                            dueDateEt.setText(dateTimeFormatter.format(dueDate))
                         }
                     TimePickerDialog(
                         this,
                         onTimeSetListener,
-                        time.hour,
-                        time.minute,
-                        android.text.format.DateFormat.is24HourFormat(this)
+                        dueDate.hour,
+                        dueDate.minute,
+                        DateFormat.is24HourFormat(this)
                     ).show()
                 }
 
             DatePickerDialog(
                 this,
                 onDateSetListener,
-                date.year,
-                date.monthValue - 1,
-                date.dayOfMonth
+                dueDate.year,
+                dueDate.monthValue - 1,
+                dueDate.dayOfMonth
             ).show()
         }
+
+        loadData()
+
+        btnSaveTask.setOnClickListener {
+            saveData()
+            dbHelper.saveTodo(todo)
+            finish()
+        }
     }
+
+    private fun loadData() {
+        todo = intent.getParcelableExtra("TODO") ?: throw IllegalStateException()
+        titleEt.setText(todo.title)
+        descriptionEt.setText(todo.description)
+        dueDateEt.setText(dateTimeFormatter.format(todo.dueDate()))
+    }
+
+    private fun saveData() {
+        todo.apply {
+            title = titleEt.text.toString()
+            description = descriptionEt.text.toString()
+        }
+    }
+
+    override fun onSupportNavigateUp(): Boolean {
+        onBackPressed()
+        return super.onSupportNavigateUp()
+    }
+
 }
