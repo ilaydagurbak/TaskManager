@@ -1,147 +1,160 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
-    <LinearLayout
-            android:id="@+id/titleLayout"
+    <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="16dp"
-            android:layout_marginEnd="8dp"
-            android:orientation="vertical"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
+            android:layout_height="wrap_content">
 
-        <TextView
-                android:id="@+id/titleTv"
+        <LinearLayout
+                android:id="@+id/titleLayout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="10dp"
-                android:text="Add Title"
-                android:textColor="@color/colorPrimaryDark"
-                android:textSize="18sp" />
+                android:layout_marginStart="@dimen/margin"
+                android:layout_marginTop="@dimen/big_margin"
+                android:layout_marginEnd="@dimen/margin"
+                android:orientation="vertical"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
 
-        <EditText
-                android:id="@+id/titleEt"
-                android:layout_width="match_parent"
-                android:layout_height="55dp"
-                android:background="@drawable/bginputtask"
-                android:hint="What Do You Do?"
-                android:inputType="text"
-                android:paddingLeft="12dp"
-                android:paddingEnd="12dp"
-                android:textColor="@color/colorPrimaryDark"
-                android:textColorHint="#B5B5B5" />
+            <TextView
+                    android:id="@+id/titleTv"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="10dp"
+                    android:text="@string/add_title"
+                    android:textColor="@color/colorPrimaryDark"
+                    android:textSize="18sp" />
 
-    </LinearLayout>
+            <EditText
+                    android:id="@+id/titleEt"
+                    android:layout_width="match_parent"
+                    android:layout_height="55dp"
+                    android:background="@drawable/bginputtask"
+                    android:hint="@string/what_do_you_do"
+                    android:importantForAutofill="no"
+                    android:inputType="text"
+                    android:paddingStart="@dimen/padding"
+                    android:paddingEnd="@dimen/padding"
+                    android:textColor="@color/colorPrimaryDark"
+                    android:textColorHint="#B5B5B5" />
 
-    <LinearLayout
-            android:id="@+id/descriptionLayout"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="16dp"
-            android:layout_marginEnd="8dp"
-            android:orientation="vertical"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/titleLayout"
-            app:layout_constraintTop_toBottomOf="@+id/titleLayout">
+        </LinearLayout>
 
-        <TextView
-                android:id="@+id/descriptionTv"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="10dp"
-                android:text="Description"
-                android:textColor="@color/colorPrimaryDark"
-                android:textSize="18sp" />
-
-        <EditText
-                android:id="@+id/descriptionEt"
-                android:layout_width="match_parent"
-                android:layout_height="55dp"
-                android:background="@drawable/bginputtask"
-                android:hint="How to?"
-                android:inputType="text"
-                android:maxLength="25"
-                android:paddingStart="12dp"
-                android:paddingEnd="12dp"
-                android:textColor="@color/colorPrimaryDark"
-                android:textColorHint="#B5B5B5" />
-
-    </LinearLayout>
-
-    <LinearLayout
-            android:id="@+id/dueDateLayout"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="16dp"
-            android:layout_marginEnd="8dp"
-            android:orientation="vertical"
-            app:layout_constraintEnd_toStartOf="@+id/titleLayout"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/descriptionLayout">
-
-        <TextView
-                android:id="@+id/dueDateTv"
+        <LinearLayout
+                android:id="@+id/descriptionLayout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="10dp"
-                android:text="Timeline"
-                android:textColor="@color/colorPrimaryDark"
-                android:textSize="18sp" />
+                android:layout_marginStart="@dimen/margin"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="@dimen/margin"
+                android:orientation="vertical"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/titleLayout">
 
-        <EditText
-                android:id="@+id/dueDateEt"
+            <TextView
+                    android:id="@+id/descriptionTv"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="10dp"
+                    android:text="@string/description"
+                    android:textColor="@color/colorPrimaryDark"
+                    android:textSize="18sp" />
+
+            <EditText
+                    android:id="@+id/descriptionEt"
+                    android:layout_width="match_parent"
+                    android:layout_height="55dp"
+                    android:background="@drawable/bginputtask"
+                    android:hint="@string/how_to"
+                    android:importantForAutofill="no"
+                    android:inputType="text"
+                    android:maxLength="25"
+                    android:paddingStart="@dimen/padding"
+                    android:paddingEnd="@dimen/padding"
+                    android:textColor="@color/colorPrimaryDark"
+                    android:textColorHint="#B5B5B5" />
+
+        </LinearLayout>
+
+        <LinearLayout
+                android:id="@+id/dueDateLayout"
                 android:layout_width="match_parent"
-                android:layout_height="55dp"
-                android:background="@drawable/bginputtask"
-                android:focusable="false"
-                android:hint="When will?"
-                android:inputType="none"
-                android:paddingStart="12dp"
-                android:paddingEnd="12dp"
-                android:textColor="@color/colorPrimaryDark"
-                android:textColorHint="#B5B5B5" />
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/margin"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="@dimen/margin"
+                android:orientation="vertical"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/descriptionLayout">
 
-    </LinearLayout>
+            <TextView
+                    android:id="@+id/dueDateTv"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="10dp"
+                    android:text="@string/due_date"
+                    android:textColor="@color/colorPrimaryDark"
+                    android:textSize="18sp" />
 
-    <Button
-            android:id="@+id/btnSaveTask"
-            android:layout_width="match_parent"
-            android:layout_height="55dp"
-            android:layout_marginStart="8dp"
-            android:layout_marginEnd="8dp"
-            android:layout_marginBottom="8dp"
-            android:background="@drawable/bgbtncreate"
-            android:text="Create Now"
-            android:textAllCaps="false"
-            android:textColor="#FFF"
-            android:textSize="22sp"
-            app:layout_constraintBottom_toTopOf="@+id/btnCancel"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="1.0"
-            app:layout_constraintStart_toStartOf="parent" />
+            <EditText
+                    android:id="@+id/dueDateEt"
+                    android:layout_width="match_parent"
+                    android:layout_height="55dp"
+                    android:background="@drawable/bginputtask"
+                    android:cursorVisible="false"
+                    android:hint="@string/when_will"
+                    android:importantForAutofill="no"
+                    android:inputType="none"
+                    android:paddingStart="@dimen/padding"
+                    android:paddingEnd="@dimen/padding"
+                    android:textColor="@color/colorPrimaryDark"
+                    android:textColorHint="#B5B5B5"
+                    tools:ignore="TextFields" />
 
-    <Button
-            android:id="@+id/btnCancel"
-            android:layout_width="match_parent"
-            android:layout_height="55dp"
-            android:layout_marginStart="8dp"
-            android:layout_marginEnd="8dp"
-            android:layout_marginBottom="8dp"
-            android:background="@drawable/bgbtncancel"
-            android:text="Cancel"
-            android:textAllCaps="false"
-            android:textColor="#AFAFAF"
-            android:textSize="22sp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent" />
-</androidx.constraintlayout.widget.ConstraintLayout>
+        </LinearLayout>
+
+        <LinearLayout
+                android:id="@+id/taskTypeLayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/margin"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="@dimen/margin"
+                android:orientation="vertical"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/dueDateLayout">
+
+            <TextView
+                    android:id="@+id/taskTypeTv"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="10dp"
+                    android:text="@string/task_type"
+                    android:textColor="@color/colorPrimaryDark"
+                    android:textSize="18sp" />
+
+            <Spinner
+                    android:id="@+id/taskTypeSpinner"
+                    android:layout_width="match_parent"
+                    android:layout_height="55dp"
+                    android:background="@drawable/bginputtask"
+                    android:focusable="false"
+                    android:inputType="none"
+                    android:paddingStart="@dimen/padding"
+                    android:paddingEnd="@dimen/padding"
+                    android:textColor="@color/colorPrimaryDark"
+                    android:textColorHint="#B5B5B5" />
+
+        </LinearLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</ScrollView>

@@ -23,4 +23,13 @@
 
     <include layout="@layout/content_add_edit_task" />
 
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/fab"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom|end"
+            android:layout_margin="@dimen/fab_margin"
+            android:tint="@android:color/white"
+            app:srcCompat="@drawable/ic_done_black_24dp" />
+
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

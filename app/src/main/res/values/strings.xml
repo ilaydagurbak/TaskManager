@@ -7,8 +7,14 @@
     <string name="dialog_edit_entry_title">Edit ToDo Item</string>
     <string name="entry_hint_text">Enter Your ToDo Item</string>
     <string name="hint_todo_item">your todo item</string>
-    <string name="save">Save</string>
-    <string name="cancel">Cancel</string>
     <string name="delete">delete</string>
     <string name="edit">edit</string>
+    <string name="done">DONE</string>
+    <string name="task_type">Task type</string>
+    <string name="due_date">Due date</string>
+    <string name="when_will">When will?</string>
+    <string name="how_to">How to?</string>
+    <string name="description">Description</string>
+    <string name="what_do_you_do">What Do You Do?</string>
+    <string name="add_title">Add Title</string>
 </resources>

@@ -4,7 +4,10 @@ import android.app.DatePickerDialog
 import android.app.TimePickerDialog
 import android.os.Bundle
 import android.text.format.DateFormat
+import android.view.View
+import android.view.inputmethod.InputMethodManager
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.getSystemService
 import kotlinx.android.synthetic.main.activity_add_edit_task.*
 import kotlinx.android.synthetic.main.content_add_edit_task.*
 import java.time.LocalDate
@@ -27,8 +30,20 @@ class AddEditTaskActivity : AppCompatActivity() {
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
         supportActionBar?.setDisplayShowHomeEnabled(true)
 
+        addEditTaskCL.isSoundEffectsEnabled = false
+        addEditTaskCL.setOnFocusChangeListener { view, hasFocus ->
+            if (hasFocus) {
+                hideKeyboard(view)
+            }
+        }
 
-        dueDateEt.setOnClickListener {
+        fab.setOnClickListener {
+            saveData()
+            dbHelper.saveTodo(todo)
+            finish()
+        }
+
+        dueDateEt.setOnFocusChangeListener { view, hasFocus ->
             val dueDate = todo.dueDate()
             val onDateSetListener =
                 DatePickerDialog.OnDateSetListener { _, year, month, dayOfMonth ->
@@ -52,22 +67,20 @@ class AddEditTaskActivity : AppCompatActivity() {
                     ).show()
                 }
 
-            DatePickerDialog(
-                this,
-                onDateSetListener,
-                dueDate.year,
-                dueDate.monthValue - 1,
-                dueDate.dayOfMonth
-            ).show()
+            if (hasFocus) {
+                hideKeyboard(view)
+                DatePickerDialog(
+                    this,
+                    onDateSetListener,
+                    dueDate.year,
+                    dueDate.monthValue - 1,
+                    dueDate.dayOfMonth
+                ).show()
+                view.clearFocus()
+            }
         }
 
         loadData()
-
-        btnSaveTask.setOnClickListener {
-            saveData()
-            dbHelper.saveTodo(todo)
-            finish()
-        }
     }
 
     private fun loadData() {
@@ -82,6 +95,11 @@ class AddEditTaskActivity : AppCompatActivity() {
             title = titleEt.text.toString()
             description = descriptionEt.text.toString()
         }
+    }
+
+    private fun hideKeyboard(view: View) {
+        val imm = getSystemService<InputMethodManager>()
+        imm?.hideSoftInputFromWindow(view.windowToken, 0)
     }
 
     override fun onSupportNavigateUp(): Boolean {

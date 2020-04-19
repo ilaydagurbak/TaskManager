@@ -21,6 +21,14 @@ class TodoViewHolder(
         description.text = todo.description
         dueDate.text = dateTimeFormatter.format(todo.dueDate())
         imageView.setImageDrawable(containerView.context.getDrawable(getIconId(todo.taskType)))
+        isDone.visibility = getVisibility(todo.taskStatus)
+    }
+
+    private fun getVisibility(taskStatus: TaskStatus): Int {
+        return when (taskStatus) {
+            TaskStatus.DONE -> View.VISIBLE
+            TaskStatus.IN_PROGRESS -> View.INVISIBLE
+        }
     }
 
     private fun getIconId(taskType: TaskType): Int {
@@ -31,5 +39,6 @@ class TodoViewHolder(
             TaskType.EMAIL -> R.drawable.ic_email_black_24dp
         }
     }
+
 
 }
