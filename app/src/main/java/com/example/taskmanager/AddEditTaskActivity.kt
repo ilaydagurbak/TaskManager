@@ -6,6 +6,8 @@ import android.os.Bundle
 import android.text.format.DateFormat
 import android.view.View
 import android.view.inputmethod.InputMethodManager
+import android.widget.AdapterView
+import android.widget.ArrayAdapter
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.getSystemService
 import kotlinx.android.synthetic.main.activity_add_edit_task.*
@@ -15,7 +17,6 @@ import java.time.LocalDateTime
 import java.time.LocalTime
 import java.time.format.DateTimeFormatter
 import java.time.format.FormatStyle
-
 
 class AddEditTaskActivity : AppCompatActivity() {
 
@@ -38,7 +39,7 @@ class AddEditTaskActivity : AppCompatActivity() {
         }
 
         fab.setOnClickListener {
-            saveData()
+            updateTodo()
             dbHelper.saveTodo(todo)
             finish()
         }
@@ -80,17 +81,36 @@ class AddEditTaskActivity : AppCompatActivity() {
             }
         }
 
-        loadData()
+        taskTypeSpinner.adapter = ArrayAdapter.createFromResource(
+            this, R.array.task_types, android.R.layout.simple_spinner_item
+        )
+            .also { arrayAdapter -> arrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item) }
+        taskTypeSpinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
+            override fun onNothingSelected(parent: AdapterView<*>?) = Unit
+
+            override fun onItemSelected(
+                parent: AdapterView<*>?,
+                view: View?,
+                position: Int,
+                id: Long
+            ) {
+                todo.taskType = TaskTypeConverter.toTaskType(position)
+            }
+
+        }
+
+        setData()
     }
 
-    private fun loadData() {
+    private fun setData() {
         todo = intent.getParcelableExtra("TODO") ?: throw IllegalStateException()
         titleEt.setText(todo.title)
         descriptionEt.setText(todo.description)
         dueDateEt.setText(dateTimeFormatter.format(todo.dueDate()))
+        taskTypeSpinner.setSelection(TaskTypeConverter.fromTaskType(todo.taskType), true)
     }
 
-    private fun saveData() {
+    private fun updateTodo() {
         todo.apply {
             title = titleEt.text.toString()
             description = descriptionEt.text.toString()
@@ -105,6 +125,23 @@ class AddEditTaskActivity : AppCompatActivity() {
     override fun onSupportNavigateUp(): Boolean {
         onBackPressed()
         return super.onSupportNavigateUp()
+    }
+
+    object TaskTypeConverter {
+        fun fromTaskType(taskType: TaskType): Int = when (taskType) {
+            TaskType.CALL -> 0
+            TaskType.MEETING -> 1
+            TaskType.TODO -> 2
+            TaskType.EMAIL -> 3
+        }
+
+        fun toTaskType(intValue: Int) = when (intValue) {
+            0 -> TaskType.CALL
+            1 -> TaskType.MEETING
+            2 -> TaskType.TODO
+            3 -> TaskType.EMAIL
+            else -> throw IllegalStateException()
+        }
     }
 
 }

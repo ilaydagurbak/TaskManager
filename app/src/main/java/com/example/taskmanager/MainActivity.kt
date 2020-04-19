@@ -119,7 +119,7 @@ class MainActivity : AppCompatActivity(), AnkoLogger {
                             "Todo has been deleted",
                             Snackbar.LENGTH_LONG
                         ).apply {
-                            setAction("UNDO") { dbHelper.saveTodo(todo) }
+                            setAction("UNDO") { dbHelper.saveTodo(todo.copy(id = "")) }
                         }.show()
                     }
                 }
@@ -143,33 +143,6 @@ class MainActivity : AppCompatActivity(), AnkoLogger {
         val intent = Intent(this, AddEditTaskActivity::class.java)
         intent.putExtra("TODO", todo)
         startActivity(intent)
-
-
-        /*MaterialDialog(this).show {
-            title(
-                if (todo.id == "") R.string.dialog_new_entry_title
-                else R.string.dialog_edit_entry_title
-            )
-            input(
-                hintRes = R.string.entry_hint_text,
-                inputType = InputType.TYPE_CLASS_TEXT or InputType.TYPE_TEXT_FLAG_MULTI_LINE,
-                waitForPositiveButton = false
-            ) { _, text ->
-                todo.title = text.toString()
-            }
-
-            positiveButton(R.string.save) {
-                dbHelper.saveTodo(todo)
-            }
-            negativeButton(R.string.cancel)
-            onShow { dlg ->
-                activeTodo = todo
-                dlg.getInputField().setText(todo.title)
-            }
-            onDismiss {
-                activeTodo = null//happens after saving activity state if rotation
-            }
-        }*/
     }
 }
 

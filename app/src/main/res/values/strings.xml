@@ -17,4 +17,10 @@
     <string name="description">Description</string>
     <string name="what_do_you_do">What Do You Do?</string>
     <string name="add_title">Add Title</string>
+    <string-array name="task_types">
+        <item>Call</item>
+        <item>Meeting</item>
+        <item>Todo</item>
+        <item>Email</item>
+    </string-array>
 </resources>
