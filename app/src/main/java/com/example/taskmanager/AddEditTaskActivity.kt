@@ -4,11 +4,9 @@ import android.annotation.SuppressLint
 import android.app.DatePickerDialog
 import android.app.TimePickerDialog
 import android.os.Bundle
-import com.google.android.material.snackbar.Snackbar
 import androidx.appcompat.app.AppCompatActivity
 import kotlinx.android.synthetic.main.activity_add_edit_task.*
 import kotlinx.android.synthetic.main.content_add_edit_task.*
-import java.text.DateFormat
 import java.time.LocalDate
 import java.time.LocalTime
 
@@ -19,11 +17,12 @@ class AddEditTaskActivity : AppCompatActivity() {
     private var dueTime: LocalTime? = null
 
 
-    @SuppressLint("SetTextI18n")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_add_edit_task)
         setSupportActionBar(toolbar)
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
+        supportActionBar?.setDisplayShowHomeEnabled(true)
 
         datetask.setOnClickListener {
             val time: LocalTime = LocalTime.now()
@@ -56,5 +55,4 @@ class AddEditTaskActivity : AppCompatActivity() {
             ).show()
         }
     }
-
 }
